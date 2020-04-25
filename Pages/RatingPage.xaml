@@ -1,0 +1,115 @@
+﻿<Page x:Class="RatingWPF.Pages.RatingPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+      xmlns:local="clr-namespace:RatingWPF.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="1000"
+       
+      Loaded="Page_Loaded"
+      Title="RatingPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="250"/>
+            <RowDefinition Height="200"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <StackPanel Margin="10">
+                <TextBox x:Name="txtINN" TextAlignment="Left" FontSize="18" Width="150" Height="25" >7702070139</TextBox>
+            </StackPanel>
+
+            <StackPanel Margin="10">
+                <DatePicker x:Name="picData"></DatePicker>
+            </StackPanel>
+            
+            <StackPanel Margin="10">
+                <Button x:Name="btnStart" Width="100" Height="25" FontSize="16" Click="btnStart_Click" >START</Button>
+            </StackPanel>
+            
+        </DockPanel>
+
+        <DockPanel Grid.Row="1">
+            <StackPanel Margin="0,0,0,0">
+
+                <telerik:RadGridView x:Name="gridMain"
+                                     IsReadOnly="True"
+                                     Height="240"
+                                     NewRowPosition="None" 
+                                     Margin="5,5,5,5"
+                                     GroupRenderMode="Flat" 
+                                     SelectionChanged="gridMain_SelectionChanged"
+                                     ShowGroupPanel="False"
+                                     CanUserInsertRows="False"
+                                     ShowSearchPanel="False" 
+                                     AlternateRowBackground="Aquamarine" AlternationCount="2"  SelectionMode="Single"
+                                     AutoGenerateColumns="False">
+
+                    <telerik:RadGridView.Columns>
+
+                        <telerik:GridViewDataColumn DataMemberBinding="{Binding rating_scale_point_id}"  
+                                    HeaderTextAlignment="Center"
+                                    IsReadOnly="True"
+                                    OptimizeDistinctFilterQuery="False"
+                                    TextAlignment="Center"
+                                    Header="ИД"/>
+
+                        <telerik:GridViewDataColumn  DataMemberBinding="{Binding rating_date, StringFormat=dd.MM.yyyy}"
+                                    Header="Дата"
+                                    ShowDistinctFilters="False"                       
+                                    HeaderTextAlignment="Center"/>
+
+                        <telerik:GridViewDataColumn DataMemberBinding="{Binding id_of_emitent}"
+                                    Header="Ид Эмитента"
+                                    Width="100"
+                                    HeaderTextAlignment="Center"/>
+
+                        <telerik:GridViewDataColumn DataMemberBinding="{Binding emitent_inn}"
+                                    Header="ИНН"
+                                    Width="100"
+                                    HeaderTextAlignment="Center"/>
+
+                        <telerik:GridViewDataColumn DataMemberBinding="{Binding name_of_emitent_rus}"
+                                    Header="Эмитент"
+                                    Width="200"
+                                    HeaderTextAlignment="Center"/>
+
+                        <telerik:GridViewDataColumn DataMemberBinding="{Binding name_rus}"
+                                    Header="Название(рус)"
+                                    Width="200"
+                                    HeaderTextAlignment="Center"/>
+
+                        <telerik:GridViewDataColumn DataMemberBinding="{Binding agency_id}"
+                                    Header="ид Агенства"
+                                    Width="100"
+                                    HeaderTextAlignment="Center"/>
+
+                        <telerik:GridViewDataColumn DataMemberBinding="{Binding scale_id}"
+                                    Header="ид шкалы"
+                                    Width="100"
+                                    HeaderTextAlignment="Center"/>
+
+                    </telerik:RadGridView.Columns>
+                </telerik:RadGridView>
+
+            </StackPanel>
+
+        </DockPanel>
+
+        <DockPanel Grid.Row="2">
+            <StackPanel Width="400" Background="Green">
+                
+            </StackPanel>
+            <StackPanel Width="600" x:Name="ScalePanel">
+
+            </StackPanel>
+
+        </DockPanel>
+        
+        
+    </Grid>
+</Page>
