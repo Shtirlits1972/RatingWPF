@@ -6,7 +6,7 @@
       xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
       xmlns:local="clr-namespace:RatingWPF.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="500" d:DesignWidth="1000"
+      d:DesignHeight="1000" d:DesignWidth="1000"
        
       Loaded="Page_Loaded"
       Title="RatingPage">
@@ -14,11 +14,11 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="250"/>
-            <RowDefinition Height="200"/>
+            <RowDefinition Height="1"/>
+            <RowDefinition Height="950"/>
         </Grid.RowDefinitions>
-
-        <DockPanel Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center">
+        
+            <DockPanel Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center">
             <StackPanel Margin="10">
                 <TextBox x:Name="txtINN" TextAlignment="Left" FontSize="18" Width="150" Height="25" >7702070139</TextBox>
             </StackPanel>
@@ -26,7 +26,12 @@
             <StackPanel Margin="10">
                 <DatePicker x:Name="picData"></DatePicker>
             </StackPanel>
-            
+
+            <StackPanel Margin="10">
+                <RadioButton GroupName="typeNum" IsChecked="True"  x:Name="typeNum1">1</RadioButton>
+                <RadioButton GroupName="typeNum" IsChecked="False" x:Name="typeNum2">2</RadioButton>
+            </StackPanel>
+
             <StackPanel Margin="10">
                 <Button x:Name="btnStart" Width="100" Height="25" FontSize="16" Click="btnStart_Click" >START</Button>
             </StackPanel>
@@ -37,6 +42,7 @@
             <StackPanel Margin="0,0,0,0">
 
                 <telerik:RadGridView x:Name="gridMain"
+                                     Visibility="Collapsed"
                                      IsReadOnly="True"
                                      Height="240"
                                      NewRowPosition="None" 
@@ -50,6 +56,12 @@
                                      AutoGenerateColumns="False">
 
                     <telerik:RadGridView.Columns>
+                        <telerik:GridViewDataColumn DataMemberBinding="{Binding Npp}"  
+                                    HeaderTextAlignment="Center"
+                                    IsReadOnly="True"
+                                    OptimizeDistinctFilterQuery="False"
+                                    TextAlignment="Center"
+                                    Header="№"/>
 
                         <telerik:GridViewDataColumn DataMemberBinding="{Binding rating_scale_point_id}"  
                                     HeaderTextAlignment="Center"
@@ -62,22 +74,7 @@
                                     Header="Дата"
                                     ShowDistinctFilters="False"                       
                                     HeaderTextAlignment="Center"/>
-
-                        <telerik:GridViewDataColumn DataMemberBinding="{Binding id_of_emitent}"
-                                    Header="Ид Эмитента"
-                                    Width="100"
-                                    HeaderTextAlignment="Center"/>
-
-                        <telerik:GridViewDataColumn DataMemberBinding="{Binding emitent_inn}"
-                                    Header="ИНН"
-                                    Width="100"
-                                    HeaderTextAlignment="Center"/>
-
-                        <telerik:GridViewDataColumn DataMemberBinding="{Binding name_of_emitent_rus}"
-                                    Header="Эмитент"
-                                    Width="200"
-                                    HeaderTextAlignment="Center"/>
-
+                                                                                         
                         <telerik:GridViewDataColumn DataMemberBinding="{Binding name_rus}"
                                     Header="Название(рус)"
                                     Width="200"
@@ -93,6 +90,11 @@
                                     Width="100"
                                     HeaderTextAlignment="Center"/>
 
+                        <telerik:GridViewDataColumn DataMemberBinding="{Binding point_name}"
+                                    Header="отметка"
+                                    Width="100"
+                                    HeaderTextAlignment="Center"/>
+
                     </telerik:RadGridView.Columns>
                 </telerik:RadGridView>
 
@@ -100,16 +102,11 @@
 
         </DockPanel>
 
-        <DockPanel Grid.Row="2">
-            <StackPanel Width="400" Background="Green">
-                
-            </StackPanel>
-            <StackPanel Width="600" x:Name="ScalePanel">
-
-            </StackPanel>
-
+        <DockPanel  Grid.Row="2">
+            <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
+                <DockPanel x:Name="ScalePanel" >
+                </DockPanel>
+            </ScrollViewer>
         </DockPanel>
-        
-        
     </Grid>
 </Page>

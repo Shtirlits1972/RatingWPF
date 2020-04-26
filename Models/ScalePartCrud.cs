@@ -15,23 +15,20 @@ namespace RatingWPF.Models
         {
             List<ScalePart> list = new List<ScalePart>();
 
-            string strCommand = "SELECT  " +
-             " [rating_scale_point_name]  " +
-             " ,[rating_scale_point_description_rus]  " +
-             " FROM[bko_web].[dbo].[Rating_Cbonds_scale]  " +
-             " where[dt_act] = (Select max([dt_act])   " +
-             " FROM[bko_web].[dbo].[Rating_Cbonds_emit] Where dt_act<= @Dtt)   " +
-             " and [scale.rating_agency.id_of_emitent] = @id_ag and [scale.rating_scale_id] = @id_sc  " +
-             " order by[rating_scale_point_ordnum]";
+            string strCommand = "Exec GetScale @id_ag, @id_sc, @Dtt ";
 
             using (IDbConnection db = new SqlConnection(strConn))
             {
-                list = db.Query<ScalePart>(strCommand, new { Dtt, id_ag, id_sc }).ToList();
+                list = db.Query<ScalePart>(strCommand, new {  id_ag, id_sc, Dtt }).ToList();
             }
             return list;
         }
 
-
+        public static string [] GetGraceWorld()
+        {
+            string[] graceWorld = { "Withdrawn", "NR", "Suspended", "PIF" };
+            return graceWorld;
+        }
         public static string GetPointName(int PointId)
         {
             string strPointName = string.Empty;
