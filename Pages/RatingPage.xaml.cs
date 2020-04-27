@@ -49,36 +49,10 @@ namespace RatingWPF.Pages
             }
 
             List<Rating> list = RatingCrud.GetAll(strInn, Dtt, typeNum);
-            gridMain.ItemsSource = list;
 
             ScalePanel.Children.Clear();
             PaintScale(list);
 
-        }
-
-        private void gridMain_SelectionChanged(object sender, Telerik.Windows.Controls.SelectionChangeEventArgs e)
-        {
-            //Rating item = (Rating)gridMain.SelectedItem;
-
-            //int PointId = item.rating_scale_point_id;
-
-            //string PointName = ScalePartCrud.GetPointName(PointId);
-
-            //List<ScalePart> listScaleParts = ScalePartCrud.GetAllScalePart(item.rating_date, item.agency_id, item.scale_id);
-
-
-            //if (listScaleParts != null && listScaleParts.Count > 0)
-            //{
-            //    try
-            //    {
-            //        PaintScale(listScaleParts, PointName);
-            //    }
-            //    catch(Exception ex)
-            //    {
-            //        MessageBox.Show(ex.Message);
-            //    }
-            //}
-            //int g = 0;
         }
 
         private void PaintScale(List<Rating> list)

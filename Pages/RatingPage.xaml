@@ -3,7 +3,6 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
       xmlns:local="clr-namespace:RatingWPF.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="1000" d:DesignWidth="1000"
@@ -14,7 +13,6 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="1"/>
             <RowDefinition Height="950"/>
         </Grid.RowDefinitions>
         
@@ -38,71 +36,7 @@
             
         </DockPanel>
 
-        <DockPanel Grid.Row="1">
-            <StackPanel Margin="0,0,0,0">
-
-                <telerik:RadGridView x:Name="gridMain"
-                                     Visibility="Collapsed"
-                                     IsReadOnly="True"
-                                     Height="240"
-                                     NewRowPosition="None" 
-                                     Margin="5,5,5,5"
-                                     GroupRenderMode="Flat" 
-                                     SelectionChanged="gridMain_SelectionChanged"
-                                     ShowGroupPanel="False"
-                                     CanUserInsertRows="False"
-                                     ShowSearchPanel="False" 
-                                     AlternateRowBackground="Aquamarine" AlternationCount="2"  SelectionMode="Single"
-                                     AutoGenerateColumns="False">
-
-                    <telerik:RadGridView.Columns>
-                        <telerik:GridViewDataColumn DataMemberBinding="{Binding Npp}"  
-                                    HeaderTextAlignment="Center"
-                                    IsReadOnly="True"
-                                    OptimizeDistinctFilterQuery="False"
-                                    TextAlignment="Center"
-                                    Header="№"/>
-
-                        <telerik:GridViewDataColumn DataMemberBinding="{Binding rating_scale_point_id}"  
-                                    HeaderTextAlignment="Center"
-                                    IsReadOnly="True"
-                                    OptimizeDistinctFilterQuery="False"
-                                    TextAlignment="Center"
-                                    Header="ИД"/>
-
-                        <telerik:GridViewDataColumn  DataMemberBinding="{Binding rating_date, StringFormat=dd.MM.yyyy}"
-                                    Header="Дата"
-                                    ShowDistinctFilters="False"                       
-                                    HeaderTextAlignment="Center"/>
-                                                                                         
-                        <telerik:GridViewDataColumn DataMemberBinding="{Binding name_rus}"
-                                    Header="Название(рус)"
-                                    Width="200"
-                                    HeaderTextAlignment="Center"/>
-
-                        <telerik:GridViewDataColumn DataMemberBinding="{Binding agency_id}"
-                                    Header="ид Агенства"
-                                    Width="100"
-                                    HeaderTextAlignment="Center"/>
-
-                        <telerik:GridViewDataColumn DataMemberBinding="{Binding scale_id}"
-                                    Header="ид шкалы"
-                                    Width="100"
-                                    HeaderTextAlignment="Center"/>
-
-                        <telerik:GridViewDataColumn DataMemberBinding="{Binding point_name}"
-                                    Header="отметка"
-                                    Width="100"
-                                    HeaderTextAlignment="Center"/>
-
-                    </telerik:RadGridView.Columns>
-                </telerik:RadGridView>
-
-            </StackPanel>
-
-        </DockPanel>
-
-        <DockPanel  Grid.Row="2">
+        <DockPanel  Grid.Row="1">
             <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
                 <DockPanel x:Name="ScalePanel" >
                 </DockPanel>
