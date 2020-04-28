@@ -202,7 +202,7 @@ namespace RatingWPF.Pages
                     gridLeft.Margin = new Thickness(2);
                     //---------------------------------------------
                     RowDefinition rowL1 = new RowDefinition();
-                    rowL1.Height = new GridLength(30);
+                    rowL1.Height = new GridLength(25);
                     gridLeft.RowDefinitions.Add(rowL1);
 
                     TextBlock textBlockL1 = new TextBlock();
@@ -213,7 +213,7 @@ namespace RatingWPF.Pages
                     gridLeft.Children.Add(textBlockL1);
                     //---------------------------------------------
                     RowDefinition rowL2 = new RowDefinition();
-                    rowL2.Height = new GridLength(30);
+                    rowL2.Height = new GridLength(25);
                     gridLeft.RowDefinitions.Add(rowL2);
 
                     TextBlock textBlockL2 = new TextBlock();
@@ -224,7 +224,7 @@ namespace RatingWPF.Pages
                     gridLeft.Children.Add(textBlockL2);
                     //---------------------------------------------
                     RowDefinition rowL3 = new RowDefinition();
-                    rowL3.Height = new GridLength(30);
+                    rowL3.Height = new GridLength(25);
                     gridLeft.RowDefinitions.Add(rowL3);
 
                     TextBlock textBlockL3 = new TextBlock();
@@ -235,7 +235,7 @@ namespace RatingWPF.Pages
                     gridLeft.Children.Add(textBlockL3);
                     //---------------------------------------------
                     RowDefinition rowL4 = new RowDefinition();
-                    rowL4.Height = new GridLength(30);
+                    rowL4.Height = new GridLength(25);
                     gridLeft.RowDefinitions.Add(rowL4);
 
                     TextBlock textBlockL4 = new TextBlock();
@@ -246,7 +246,7 @@ namespace RatingWPF.Pages
                     gridLeft.Children.Add(textBlockL4);
                     //---------------------------------------------
                     RowDefinition rowL5 = new RowDefinition();
-                    rowL5.Height = new GridLength(30);
+                    rowL5.Height = new GridLength(25);
                     gridLeft.RowDefinitions.Add(rowL5);
 
                     TextBlock textBlockL5 = new TextBlock();
@@ -255,9 +255,20 @@ namespace RatingWPF.Pages
                     Grid.SetRow(textBlockL5, 4);
                     Grid.SetColumn(textBlockL5, 0);
                     gridLeft.Children.Add(textBlockL5);
-                    //--------------------------------------------------------
+                //--------------------------------------------------------
+                RowDefinition rowL6 = new RowDefinition();
+                rowL6.Height = new GridLength(25);
+                gridLeft.RowDefinitions.Add(rowL6);
 
-                    Grid.SetRow(gridLeft, j);
+                TextBlock textBlockL6 = new TextBlock();
+                textBlockL6.Text = list[j].name_rus;
+                textBlockL6.Margin = new Thickness(5, 0, 0, 1);
+                Grid.SetRow(textBlockL6, 5);
+                Grid.SetColumn(textBlockL6, 0);
+                gridLeft.Children.Add(textBlockL6);
+                //--------------------------------------------------------
+
+                Grid.SetRow(gridLeft, j);
                     Grid.SetColumn(gridLeft, 0);
                     gridMain.Children.Add(gridLeft);
                 }
