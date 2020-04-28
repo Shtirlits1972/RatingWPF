@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:RatingWPF.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="1000" d:DesignWidth="1000"
+      d:DesignHeight="1000" d:DesignWidth="1500"
        
       Loaded="Page_Loaded"
       Title="RatingPage">
@@ -18,7 +18,7 @@
         
             <DockPanel Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center">
             <StackPanel Margin="10">
-                <TextBox x:Name="txtINN" TextAlignment="Left" FontSize="18" Width="150" Height="25" >7702070139</TextBox>
+                <TextBox x:Name="txtINN" TextAlignment="Left" FontSize="18" Width="150" Height="25" Text="7744001497" />
             </StackPanel>
 
             <StackPanel Margin="10">

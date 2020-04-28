@@ -51,21 +51,21 @@ namespace RatingWPF.Pages
             List<Rating> list = RatingCrud.GetAll(strInn, Dtt, typeNum);
 
             ScalePanel.Children.Clear();
-            PaintScale(list);
+            PaintScale(list, Dtt);
 
         }
 
-        private void PaintScale(List<Rating> list)
+        private void PaintScale(List<Rating> list, DateTime Dtt)
         {
                 Grid gridMain = new Grid();
 
                 ColumnDefinition leftColumnDef = new ColumnDefinition();
-                leftColumnDef.Width = new GridLength(300);
+                leftColumnDef.Width = new GridLength(450);
 
                 gridMain.ColumnDefinitions.Add(leftColumnDef);
 
                 ColumnDefinition rightColumnDef = new ColumnDefinition();
-                rightColumnDef.Width = new GridLength(700);
+                rightColumnDef.Width = new GridLength(10500);
 
                 gridMain.ColumnDefinitions.Add(rightColumnDef);
 
@@ -80,7 +80,7 @@ namespace RatingWPF.Pages
                     gridRight.Background = new SolidColorBrush(Colors.LightCyan);
                     gridRight.Margin = new Thickness(2, 2, 2, 2);
 
-                    List<ScalePart> listScaleParts = ScalePartCrud.GetAllScalePart(list[j].rating_date, list[j].agency_id, list[j].scale_id);
+                    List<ScalePart> listScaleParts = ScalePartCrud.GetAllScalePart(Dtt, list[j].agency_id, list[j].scale_id);
 
                     RowDefinition row0 = new RowDefinition();
                     row0.Height = new GridLength(30);
@@ -147,11 +147,11 @@ namespace RatingWPF.Pages
                         {
                             block1.Background = new SolidColorBrush(Colors.Green);
                         }
-                        else if ((i > 3) && (i < 9))
+                        else if ((i > 3) && (i < 11))
                         {
                             block1.Background = new SolidColorBrush(Colors.Yellow);
                         }
-                        else if ((i >= 9))
+                        else if ((i >= 11))
                         {
                             block1.Background = new SolidColorBrush(Colors.Red);
                         }
