@@ -68,6 +68,7 @@
     </ApplicationDefinition>
     <Compile Include="Models\Rating.cs" />
     <Compile Include="Models\RatingCrud.cs" />
+    <Compile Include="Models\ScaleLine.cs" />
     <Compile Include="Models\ScalePart.cs" />
     <Compile Include="Models\ScalePartCrud.cs" />
     <Compile Include="Pages\RatingPage.xaml.cs">

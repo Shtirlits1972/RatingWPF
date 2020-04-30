@@ -14,6 +14,7 @@ namespace RatingWPF.Models
         public int agency_id { get; set; }
         public int scale_id { get; set; }
         public string name_rus { get; set; }
+        public string agency_name_rus { get; set; }
         public string point_name { get; set; }
 
 

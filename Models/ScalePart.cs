@@ -19,6 +19,7 @@ namespace RatingWPF.Models
         public string name_of_emitent_rus { get; set; }
         public string name_of_emitent_eng { get; set; }
         public DateTime dt_act { get; set; }
+        public string typeF { get; set; }
 
         public override string ToString()
         {
