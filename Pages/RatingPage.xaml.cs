@@ -28,11 +28,6 @@ namespace RatingWPF.Pages
             picData.DisplayDate = dateTime;
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
             string strInn = txtINN.Text;
@@ -50,15 +45,13 @@ namespace RatingWPF.Pages
 
             List<Rating> list = RatingCrud.GetAll(strInn, Dtt, typeNum);
             ScalePanel.Children.Clear();
-            //  PaintScale(list, Dtt);
-            //PaintScale2(list);
             List<ScaleLine> scaleLines = GetScaleLines(list, Dtt);
 
-            PaintScale3(scaleLines);
-            int g = 0;
+            PaintScale3(scaleLines, list[0].emitent_name_rus);
+
         }
 
-        private void PaintScale3(List<ScaleLine> scaleLines)
+        private void PaintScale3(List<ScaleLine> scaleLines, string emitent_name_rus)
         {
             Grid gridMain = new Grid();
             #region Head
@@ -80,32 +73,60 @@ namespace RatingWPF.Pages
 
             RowDefinition rowHead = new RowDefinition();
             rowHead.Height = new GridLength(30);
+
+            TextBlock txtHeadMark = new TextBlock();
+            txtHeadMark.Text = emitent_name_rus;
+            txtHeadMark.HorizontalAlignment = HorizontalAlignment.Center;
+            txtHeadMark.VerticalAlignment = VerticalAlignment.Bottom;
+            txtHeadMark.FontSize = 20;
+            txtHeadMark.FontWeight = FontWeight.FromOpenTypeWeight(700); 
+
+            Grid.SetRow(txtHeadMark, 0);
+            Grid.SetColumn(txtHeadMark, 0);
+            gridMain.Children.Add(txtHeadMark);
+
+
             gridMain.RowDefinitions.Add(rowHead);
 
             TextBlock txtNational = new TextBlock();
             txtNational.Text = "Национальная";
-            txtNational.Margin = new Thickness(10, 0, 0, 0);
+            txtNational.Margin = new Thickness(0, 0, 0, 0);
+            txtNational.FontSize = 20;
+            txtNational.FontWeight = FontWeight.FromOpenTypeWeight(700);
 
-            Grid.SetRow(txtNational, 0);
-            Grid.SetColumn(txtNational, 1);
+            DockPanel dockPanelN = new DockPanel();
+            dockPanelN.HorizontalAlignment = HorizontalAlignment.Center;
+            dockPanelN.VerticalAlignment = VerticalAlignment.Bottom;
+            dockPanelN.Children.Add(txtNational);
 
-            gridMain.Children.Add(txtNational);
+            Grid.SetRow(dockPanelN, 0);
+            Grid.SetColumn(dockPanelN, 1);
+
+            gridMain.Children.Add(dockPanelN);
 
 
             TextBlock txtForeign = new TextBlock();
             txtForeign.Text = "Международная";
             txtForeign.Margin = new Thickness(10, 0, 0, 0);
+            txtForeign.FontSize = 20;
+            txtForeign.FontWeight = FontWeight.FromOpenTypeWeight(700);
 
-            Grid.SetRow(txtForeign, 0);
-            Grid.SetColumn(txtForeign, 2);
+            DockPanel dockPanelF = new DockPanel();
+            dockPanelF.HorizontalAlignment = HorizontalAlignment.Center;
+            dockPanelF.VerticalAlignment = VerticalAlignment.Bottom;
+            dockPanelF.Children.Add(txtForeign);
 
-            gridMain.Children.Add(txtForeign);
+            Grid.SetRow(dockPanelF, 0);
+            Grid.SetColumn(dockPanelF, 2);
+
+
+            gridMain.Children.Add(dockPanelF);
             #endregion
 
             for(int i=0; i< scaleLines.Count; i++)
             {
                 RowDefinition rowItem = new RowDefinition();
-                rowItem.Height = new GridLength(150);
+                rowItem.Height = new GridLength(180);
                 gridMain.RowDefinitions.Add(rowItem);
 
                 #region Head
@@ -122,6 +143,8 @@ namespace RatingWPF.Pages
 
                 TextBlock textAgency = new TextBlock();
                 textAgency.Text = scaleLines[i].AgencyName;
+                textAgency.FontWeight = FontWeight.FromOpenTypeWeight(700);
+                textAgency.FontSize = 20;  
                 textAgency.Margin = new Thickness(5, 0, 0, 1);
                 Grid.SetRow(textAgency, 0);
                 Grid.SetColumn(textAgency, 0);
@@ -137,6 +160,30 @@ namespace RatingWPF.Pages
                 Grid.SetRow(textStatusN, 1);
                 Grid.SetColumn(textStatusN, 0);
                 gridHead.Children.Add(textStatusN);
+                //-----------------------------------------
+                RowDefinition rowDataN = new RowDefinition();
+                rowDataN.Height = new GridLength(25);
+                gridHead.RowDefinitions.Add(rowDataN);
+
+                TextBlock textDataN = new TextBlock();
+
+                string strDataN = "";
+
+                if(scaleLines[i].DateN != null)
+                {
+                    if (!String.IsNullOrEmpty(((DateTime)scaleLines[i].DateN).ToShortDateString()))
+                    {
+                        strDataN = ((DateTime)scaleLines[i].DateN).ToShortDateString();
+                    }
+                }
+
+                textDataN.Text = "Дата: " + strDataN;
+
+                textDataN.Margin = new Thickness(5, 0, 0, 1);
+                Grid.SetRow(textDataN, 2);
+                Grid.SetColumn(textDataN, 0);
+                gridHead.Children.Add(textDataN);
+                //-------------------------
 
                 RowDefinition rowStatusF = new RowDefinition();
                 rowStatusF.Height = new GridLength(25);
@@ -145,9 +192,34 @@ namespace RatingWPF.Pages
                 TextBlock textStatusF = new TextBlock();
                 textStatusF.Text = "Международный статус: " + scaleLines[i].StatusF;
                 textStatusF.Margin = new Thickness(5, 0, 0, 1);
-                Grid.SetRow(textStatusF, 2);
+                Grid.SetRow(textStatusF, 3);
                 Grid.SetColumn(textStatusF, 0);
                 gridHead.Children.Add(textStatusF);
+
+                //-----------------------------------------
+                RowDefinition rowDataF = new RowDefinition();
+                rowDataF.Height = new GridLength(25);
+                gridHead.RowDefinitions.Add(rowDataF);
+
+                TextBlock textDataF = new TextBlock();
+
+                string strDataF = "";
+
+                if (scaleLines[i].DateF != null)
+                {
+                    if (!String.IsNullOrEmpty(((DateTime)scaleLines[i].DateF).ToShortDateString()))
+                    {
+                        strDataF = ((DateTime)scaleLines[i].DateF).ToShortDateString();
+                    }
+                }
+
+                textDataF.Text = "Дата: " + strDataF;
+
+                textDataF.Margin = new Thickness(5, 0, 0, 1);
+                Grid.SetRow(textDataF, 4);
+                Grid.SetColumn(textDataF, 0);
+                gridHead.Children.Add(textDataF);
+                //-------------------------
 
                 gridMain.Children.Add(gridHead); 
                 #endregion
@@ -162,7 +234,7 @@ namespace RatingWPF.Pages
 
                 if(scaleLines[i].National != null)
                 {
-                    gridNational = GetGridScale(gridNational, scaleLines[i].National, scaleLines[i].PointNameN);
+                    gridNational = GetGridScale(gridNational, scaleLines[i].National, scaleLines[i].DateN, scaleLines[i].PointNameN);
                 }
 
                 gridMain.Children.Add(gridNational);
@@ -178,28 +250,17 @@ namespace RatingWPF.Pages
 
                 if (scaleLines[i].Foreign != null)
                 {
-                    try
-                    {
-                        gridForeign = GetGridScale(gridForeign, scaleLines[i].Foreign, scaleLines[i].PointNameF);
-                    }
-                    catch(Exception ex)
-                    {
-                        string error = ex.Message;
-                        int h = 0;
-                    }
-                    
+                   gridForeign = GetGridScale(gridForeign, scaleLines[i].Foreign, scaleLines[i].DateF, scaleLines[i].PointNameF);
                 }
 
                 gridMain.Children.Add(gridForeign); 
                 #endregion
             }
 
-
-
             ScalePanel.Children.Add(gridMain);
         }
 
-        private Grid GetGridScale(Grid grid, List<ScalePart> scaleParts, string PointName="")
+        private Grid GetGridScale(Grid grid, List<ScalePart> scaleParts, DateTime? date,  string PointName="")
         {
             RowDefinition row0 = new RowDefinition();
             row0.Height = new GridLength(30);
@@ -212,6 +273,29 @@ namespace RatingWPF.Pages
             RowDefinition row2 = new RowDefinition();
             row2.Height = new GridLength(70);
             grid.RowDefinitions.Add(row2);
+
+            RowDefinition rowdata = new RowDefinition();
+            rowdata.Height = new GridLength(30);
+            grid.RowDefinitions.Add(rowdata);
+
+            TextBlock textBlockData = new TextBlock();
+
+            string strData = "";
+
+            if(date != null)
+            {
+                strData = ((DateTime)date).ToShortDateString();
+            }
+
+            textBlockData.Text = strData;
+            textBlockData.HorizontalAlignment = HorizontalAlignment.Center;
+
+            Grid.SetRow(textBlockData, 3);
+            Grid.SetColumn(textBlockData, 0);
+            Grid.SetColumnSpan(textBlockData, scaleParts.Count);
+
+            grid.Children.Add(textBlockData);
+
 
             for (int j = 0; j < scaleParts.Count; j++)
             {
@@ -228,7 +312,22 @@ namespace RatingWPF.Pages
                 RotateTransform rotate = new RotateTransform(-90);
                 block.LayoutTransform = rotate;
 
-                block.ToolTip = scaleParts[j].rating_scale_point_description_rus;
+                TextBlock txtTooltip = new TextBlock();
+                txtTooltip.Width = 250;
+
+                int HeightBlock = (scaleParts[j].rating_scale_point_description_rus.Length / 25) * 20;
+
+                if(HeightBlock == 0)
+                {
+                    HeightBlock = 20;
+                }
+
+                txtTooltip.Height = HeightBlock;
+                txtTooltip.TextWrapping = TextWrapping.WrapWithOverflow;
+                txtTooltip.TextAlignment = TextAlignment.Left;
+                txtTooltip.Text = scaleParts[j].rating_scale_point_description_rus;
+
+                block.ToolTip = txtTooltip;
                 block.Margin = new Thickness(2, 2, 2, 2);
                 block.Background = new SolidColorBrush(Colors.LightGray);
                 block.TextAlignment = TextAlignment.Center;
@@ -295,105 +394,10 @@ namespace RatingWPF.Pages
                         grid.Children.Add(canvas);
                     }
                 }
-
-                
                 #endregion
             }
-
-
             return grid;
         }
-
-        //private void PaintScale2(List<Rating> list)
-        //{
-        //    //Grid gridMain = new Grid();
-
-        #region Head
-        //    //ColumnDefinition emitentColumnDef = new ColumnDefinition();
-        //    //emitentColumnDef.Width = new GridLength(300);
-
-        //    //gridMain.ColumnDefinitions.Add(emitentColumnDef);
-
-        //    //ColumnDefinition nationalColumnDef = new ColumnDefinition();
-        //    //nationalColumnDef.Width = new GridLength(600);
-
-        //    //gridMain.ColumnDefinitions.Add(nationalColumnDef);
-
-
-        //    //ColumnDefinition foreignColumnDef = new ColumnDefinition();
-        //    //foreignColumnDef.Width = new GridLength(600);
-
-        //    //gridMain.ColumnDefinitions.Add(foreignColumnDef);
-
-        //    //RowDefinition rowHead = new RowDefinition();
-        //    //rowHead.Height = new GridLength(30);
-        //    //gridMain.RowDefinitions.Add(rowHead);
-
-        //    //TextBlock txtNational = new TextBlock();
-        //    //txtNational.Text = "Национальная";
-        //    //txtNational.Margin = new Thickness(10, 0, 0, 0);
-
-        //    //Grid.SetRow(txtNational, 0);
-        //    //Grid.SetColumn(txtNational, 1);
-
-        //    //gridMain.Children.Add(txtNational);
-
-
-        //    //TextBlock txtForeign = new TextBlock();
-        //    //txtForeign.Text = "Международная";
-        //    //txtForeign.Margin = new Thickness(10, 0, 0, 0);
-
-        //    //Grid.SetRow(txtForeign, 0);
-        //    //Grid.SetColumn(txtForeign, 2);
-
-        //    //gridMain.Children.Add(txtForeign);
-        #endregion
-
-        //    //List<string> emitents = list.Select(s => s.agency_name_rus).Distinct().ToList();
-
-        //    //for(int i=0; i < emitents.Count; i++ )
-        //    //{
-        //    //    RowDefinition rowItem = new RowDefinition();
-        //    //    rowItem.Height = new GridLength(150);
-        //    //    gridMain.RowDefinitions.Add(rowItem);
-
-        //    //    Grid gridHead = new Grid();
-        //    //    gridHead.Background = new SolidColorBrush(Colors.LightCyan);
-        //    //    gridHead.Margin = new Thickness(1, 1, 1, 1);
-
-        //    //    Grid.SetRow(gridHead, i+1);
-        //    //    Grid.SetColumn(gridHead, 0);
-
-        //    //    gridMain.Children.Add(gridHead);
-
-
-        //    //    Grid gridNational = new Grid();
-        //    //    gridNational.Background = new SolidColorBrush(Colors.LightCyan);
-        //    //    gridNational.Margin = new Thickness(1, 1, 1, 1);
-
-        //    //    Grid.SetRow(gridNational, i + 1);
-        //    //    Grid.SetColumn(gridNational, 1);
-
-        //    //    gridMain.Children.Add(gridNational);
-
-
-        //    //    Grid gridForeign = new Grid();
-        //    //    gridForeign.Background = new SolidColorBrush(Colors.LightCyan);
-        //    //    gridForeign.Margin = new Thickness(1, 1, 1, 1);
-
-        //    //    Grid.SetRow(gridForeign, i + 1);
-        //    //    Grid.SetColumn(gridForeign, 2);
-
-        //    //    gridMain.Children.Add(gridForeign);
-        //    //}
-
-
-
-
-
-        //    //ScalePanel.Children.Add(gridMain);
-        //}
-
         private List<ScaleLine> GetScaleLines(List<Rating> list, DateTime Dtt)
         {
             List<ScaleLine> scaleLines = new List<ScaleLine>();
@@ -414,12 +418,22 @@ namespace RatingWPF.Pages
                             scaleLine.PointNameN = list[j].point_name;
                             scaleLine.StatusN = list[j].name_rus;
                             scaleLine.National = scaleParts;
+
+                            if(list[j].rating_date != null)
+                            {
+                                scaleLine.DateN = list[j].rating_date;
+                            } 
                         }
                         else if (scaleParts[0].typeF == "F" && (scaleLine.Foreign == null))
                         {
                             scaleLine.PointNameF = list[j].point_name;
                             scaleLine.StatusF = list[j].name_rus;
                             scaleLine.Foreign = scaleParts;
+
+                            if (list[j].rating_date != null)
+                            {
+                                scaleLine.DateF = list[j].rating_date;
+                            }
                         }
                     }
                 }

@@ -13,7 +13,8 @@ namespace RatingWPF.Models
         public string StatusF { get; set; } = "";
         public string PointNameN { get; set; }
         public string PointNameF { get; set; }
-
+        public DateTime? DateN { get; set; }
+        public DateTime? DateF { get; set; }
 
         public List<ScalePart> National { get; set; }
         public List<ScalePart> Foreign { get; set; }

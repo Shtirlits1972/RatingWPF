@@ -16,6 +16,7 @@ namespace RatingWPF.Models
         public string name_rus { get; set; }
         public string agency_name_rus { get; set; }
         public string point_name { get; set; }
+        public string emitent_name_rus { get; set; }
 
 
         public override string ToString()

@@ -6,8 +6,6 @@
       xmlns:local="clr-namespace:RatingWPF.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="1000" d:DesignWidth="1500"
-       
-      Loaded="Page_Loaded"
       Title="RatingPage">
 
     <Grid>
