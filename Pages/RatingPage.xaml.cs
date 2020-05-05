@@ -78,7 +78,7 @@ namespace RatingWPF.Pages
             txtHeadMark.Text = emitent_name_rus;
             txtHeadMark.HorizontalAlignment = HorizontalAlignment.Center;
             txtHeadMark.VerticalAlignment = VerticalAlignment.Bottom;
-            txtHeadMark.FontSize = 20;
+            txtHeadMark.FontSize = 18;
             txtHeadMark.FontWeight = FontWeight.FromOpenTypeWeight(700); 
 
             Grid.SetRow(txtHeadMark, 0);
@@ -91,7 +91,7 @@ namespace RatingWPF.Pages
             TextBlock txtNational = new TextBlock();
             txtNational.Text = "Национальная";
             txtNational.Margin = new Thickness(0, 0, 0, 0);
-            txtNational.FontSize = 20;
+            txtNational.FontSize = 18;
             txtNational.FontWeight = FontWeight.FromOpenTypeWeight(700);
 
             DockPanel dockPanelN = new DockPanel();
@@ -108,7 +108,7 @@ namespace RatingWPF.Pages
             TextBlock txtForeign = new TextBlock();
             txtForeign.Text = "Международная";
             txtForeign.Margin = new Thickness(10, 0, 0, 0);
-            txtForeign.FontSize = 20;
+            txtForeign.FontSize = 18;
             txtForeign.FontWeight = FontWeight.FromOpenTypeWeight(700);
 
             DockPanel dockPanelF = new DockPanel();
@@ -131,7 +131,7 @@ namespace RatingWPF.Pages
 
                 #region Head
                 Grid gridHead = new Grid();
-                gridHead.Background = new SolidColorBrush(Colors.LightCyan);
+                gridHead.Background = new SolidColorBrush(Color.FromArgb(250, 255, 255, 250));
                 gridHead.Margin = new Thickness(1, 1, 1, 1);
 
                 Grid.SetRow(gridHead, i + 1);
@@ -144,7 +144,7 @@ namespace RatingWPF.Pages
                 TextBlock textAgency = new TextBlock();
                 textAgency.Text = scaleLines[i].AgencyName;
                 textAgency.FontWeight = FontWeight.FromOpenTypeWeight(700);
-                textAgency.FontSize = 20;  
+                textAgency.FontSize = 18;  
                 textAgency.Margin = new Thickness(5, 0, 0, 1);
                 Grid.SetRow(textAgency, 0);
                 Grid.SetColumn(textAgency, 0);
@@ -226,7 +226,7 @@ namespace RatingWPF.Pages
 
                 #region National
                 Grid gridNational = new Grid();
-                gridNational.Background = new SolidColorBrush(Colors.LightCyan);
+                gridNational.Background = new SolidColorBrush(Color.FromArgb(250, 255, 255, 250));
                 gridNational.Margin = new Thickness(1, 1, 1, 1);
 
                 Grid.SetRow(gridNational, i + 1);
@@ -242,7 +242,7 @@ namespace RatingWPF.Pages
 
                 #region Foreign
                 Grid gridForeign = new Grid();
-                gridForeign.Background = new SolidColorBrush(Colors.LightCyan);
+                gridForeign.Background = new SolidColorBrush(Color.FromArgb(250, 255, 255, 250));
                 gridForeign.Margin = new Thickness(1, 1, 1, 1);
 
                 Grid.SetRow(gridForeign, i + 1);
@@ -267,7 +267,7 @@ namespace RatingWPF.Pages
             grid.RowDefinitions.Add(row0);
 
             RowDefinition row1 = new RowDefinition();
-            row1.Height = new GridLength(50);
+            row1.Height = new GridLength(10);
             grid.RowDefinitions.Add(row1);
 
             RowDefinition row2 = new RowDefinition();
@@ -287,7 +287,7 @@ namespace RatingWPF.Pages
                 strData = ((DateTime)date).ToShortDateString();
             }
 
-            textBlockData.Text = strData;
+            textBlockData.Text = "от " + strData;
             textBlockData.HorizontalAlignment = HorizontalAlignment.Center;
 
             Grid.SetRow(textBlockData, 3);
@@ -381,9 +381,9 @@ namespace RatingWPF.Pages
                         myPolygon.StrokeThickness = 1;
                         myPolygon.HorizontalAlignment = HorizontalAlignment.Left;
                         myPolygon.VerticalAlignment = VerticalAlignment.Center;
-                        Point Point1 = new Point(0, 15);
+                        Point Point1 = new Point(5, 20);
                         Point Point2 = new Point(10, 30);
-                        Point Point3 = new Point(20, 15);
+                        Point Point3 = new Point(15, 20);
                         PointCollection myPointCollection = new PointCollection();
                         myPointCollection.Add(Point1);
                         myPointCollection.Add(Point2);
@@ -465,7 +465,7 @@ namespace RatingWPF.Pages
 
 
                     Grid gridRight = new Grid();
-                    gridRight.Background = new SolidColorBrush(Colors.LightCyan);
+                    gridRight.Background = new SolidColorBrush(Color.FromArgb(250, 255, 255, 250));
                     gridRight.Margin = new Thickness(2, 2, 2, 2);
 
                     List<ScalePart> listScaleParts = ScalePartCrud.GetAllScalePart(Dtt, list[j].agency_id, list[j].scale_id);
@@ -477,7 +477,7 @@ namespace RatingWPF.Pages
                     gridRight.RowDefinitions.Add(row0);
 
                     RowDefinition row1 = new RowDefinition();
-                    row1.Height = new GridLength(50);
+                    row1.Height = new GridLength(10);
                     gridRight.RowDefinitions.Add(row1);
 
                     RowDefinition row2 = new RowDefinition();
@@ -568,10 +568,10 @@ namespace RatingWPF.Pages
                             myPolygon.StrokeThickness = 1;
                             myPolygon.HorizontalAlignment = HorizontalAlignment.Left;
                             myPolygon.VerticalAlignment = VerticalAlignment.Center;
-                            System.Windows.Point Point1 = new System.Windows.Point(0, 15);
-                            System.Windows.Point Point2 = new System.Windows.Point(10, 30);
-                            System.Windows.Point Point3 = new System.Windows.Point(20, 15);
-                            PointCollection myPointCollection = new PointCollection();
+                        Point Point1 = new Point(5, 15);
+                        Point Point2 = new Point(10, 30);
+                        Point Point3 = new Point(15, 15);
+                        PointCollection myPointCollection = new PointCollection();
                             myPointCollection.Add(Point1);
                             myPointCollection.Add(Point2);
                             myPointCollection.Add(Point3);
@@ -590,7 +590,7 @@ namespace RatingWPF.Pages
 
                     //=========================================================================================================
                     Grid gridLeft = new Grid();
-                    gridLeft.Background = new SolidColorBrush(Colors.LightCyan);
+                    gridLeft.Background = new SolidColorBrush(Color.FromArgb(250, 255, 255, 250));
                     gridLeft.Margin = new Thickness(2);
                     //---------------------------------------------
                     //RowDefinition rowL1 = new RowDefinition();
